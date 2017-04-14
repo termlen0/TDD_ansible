@@ -1,0 +1,21 @@
+- name: Add a DHCP Helper to SVI 100-101
+  connection: local
+  gather_facts: no
+  hosts: switches
+
+  vars:
+    nxos_provider:
+      username: "ntc"
+      password: "ntc123"
+      connection: "ssh"
+      platform: "cisco_nxos"
+      host: "{{ inventory_hostname }}"
+
+    desired_vlan: "101"
+
+  roles:
+
+    - role: validate
+      tags: test
+    - role: add_vlan
+      tags: add

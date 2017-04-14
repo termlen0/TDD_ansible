@@ -1,0 +1,9 @@
+- name: Add the desired vlan to the switch
+  nxos_vlan:
+    vlan_id: "{{ desired_vlan }}"
+    name: test_vlan
+    admin_state: up
+    username: "ntc"
+    password: "ntc123"
+    transport: nxapi
+    host: "{{ inventory_hostname }}"

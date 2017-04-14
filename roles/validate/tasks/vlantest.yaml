@@ -1,0 +1,14 @@
+- name: Test if the vlan  exists
+  ntc_show_command:
+    template_dir: "/vagrant/ntc-templates/templates"
+    provider: "{{ nxos_provider }}"
+    command: 'show vlan'
+  register: output
+
+
+- set_fact:
+    vlan_list: "{{ output.response | map(attribute='vlan_id') | list }}"
+
+- assert:
+    that:
+      - "'{{ desired_vlan }}' in vlan_list "
